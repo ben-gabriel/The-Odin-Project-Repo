@@ -10,5 +10,6 @@ function book(title, author, pages, state){
     }
 }
 
-let book1 = new book('Road to Azaroth', 'Ravin Enger', 300, 'finished');
-console.log(book1.info());
+// let book1 = new book('Road to Azaroth', 'Ravin Enger', 300, 'finished');
+// console.log(book1.info());
+
