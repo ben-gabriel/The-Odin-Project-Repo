@@ -1,4 +1,15 @@
-body{
+#inputDisplay{
     display: flex;
     flex-direction: column;
+}
+
+#booksDisplay{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+div{
+    margin: 1em;
+    border: 1px black solid;
+    width: fit-content;
 }
