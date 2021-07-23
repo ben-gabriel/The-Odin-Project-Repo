@@ -21,17 +21,22 @@ function addBookToLibrary(title, author, pages, state){
 // get the booksDisplay sectoin, to put new divs inside
 const booksDisplay = document.getElementById('booksDisplay');
 
-function displayBooks(){
-    for (let book in myLibrary) {
-        let newDiv = document.createElement('div');
+function displayAllBooks(){
+    for (let book in myLibrary){
+        displayBook(book);
+    }
+}
+
+function displayBook(book){
+    let newDiv = document.createElement('div');
         newDiv.innerHTML = `
             <h1>${myLibrary[book].title}</h1>
             <h3>${myLibrary[book].author}</h3>
             <h3>${myLibrary[book].pages} pages</h3>    
             <h3>${myLibrary[book].state}</h3>
         `;
-        booksDisplay.appendChild(newDiv)
-    }
+        newDiv.dataset.bookId = book;
+        booksDisplay.insertBefore(newDiv, booksDisplay.firstChild)
 }
 
 // input
@@ -49,7 +54,7 @@ submitBtn.addEventListener('click', ()=>{
     inputPages.value = '';
     inputState.value = '';
 
-    displayBooks();
+    displayBook(myLibrary.length-1);
 
 });
 
