@@ -18,7 +18,7 @@ function addBookToLibrary(title, author, pages, state){
     myLibrary.push(newBook);
 }
 
-// get the booksDisplay sectoin, to put new divs inside
+// get the booksDisplay section, to put new divs inside
 const booksDisplay = document.getElementById('booksDisplay');
 
 function displayBook(book){
@@ -31,11 +31,11 @@ function displayBook(book){
         <h3>${myLibrary[book].state}</h3>
     `;
 
-    newDiv.dataset.bookId = book;
-    booksDisplay.insertBefore(newDiv, booksDisplay.firstChild)
-    
-    booksDisplay.firstChild.addEventListener('click', ()=>{
-        console.log(book);
+    // newDiv.dataset.bookId = book;
+    booksDisplay.insertBefore(newDiv, (booksDisplay.firstChild).nextSibling.nextSibling);
+
+    let deleteBtn = (newDiv.getElementsByTagName('button'));
+    deleteBtn[0].addEventListener('click', ()=>{
         deleteBook(newDiv, book);
     })
 }
@@ -75,6 +75,13 @@ const inputAuthor = document.getElementById('author');
 const inputPages = document.getElementById('pages');
 const inputState = document.getElementById('state');
 const submitBtn = document.getElementById('submitBtn');
+
+const inputForm = document.getElementById('inputForm');
+const newBookBtn = document.getElementById('newBookBtn');
+newBookBtn.addEventListener('click', ()=>{
+    inputForm.classList.toggle('hidden');
+    console.log('sadasd')
+});
 
 // Main
 

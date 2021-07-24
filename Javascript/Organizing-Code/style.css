@@ -1,6 +1,15 @@
-#inputDisplay{
+body{
+    display: grid;
+}
+
+#inputForm{
     display: flex;
     flex-direction: column;
+    width: 300px;
+}
+
+.hidden{
+    visibility: hidden;
 }
 
 #booksDisplay{
