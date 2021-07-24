@@ -11,32 +11,62 @@ function book(title, author, pages, state){
 }
 
 let myLibrary = [];
+myLibrary[0] = ''; // empty index to make permutations
 
 function addBookToLibrary(title, author, pages, state){
     let newBook = new book(title, author, pages, state);
     myLibrary.push(newBook);
-
 }
 
 // get the booksDisplay sectoin, to put new divs inside
 const booksDisplay = document.getElementById('booksDisplay');
 
-function displayAllBooks(){
-    for (let book in myLibrary){
-        displayBook(book);
-    }
-}
-
 function displayBook(book){
     let newDiv = document.createElement('div');
-        newDiv.innerHTML = `
-            <h1>${myLibrary[book].title}</h1>
-            <h3>${myLibrary[book].author}</h3>
-            <h3>${myLibrary[book].pages} pages</h3>    
-            <h3>${myLibrary[book].state}</h3>
-        `;
-        newDiv.dataset.bookId = book;
-        booksDisplay.insertBefore(newDiv, booksDisplay.firstChild)
+    newDiv.innerHTML = `
+        <button class="deleteBtn">X</button>
+        <h1>${myLibrary[book].title}</h1>
+        <h3>${myLibrary[book].author}</h3>
+        <h3>${myLibrary[book].pages} pages</h3>    
+        <h3>${myLibrary[book].state}</h3>
+    `;
+
+    newDiv.dataset.bookId = book;
+    booksDisplay.insertBefore(newDiv, booksDisplay.firstChild)
+    
+    booksDisplay.firstChild.addEventListener('click', ()=>{
+        console.log(book);
+        deleteBook(newDiv, book);
+    })
+}
+
+function deleteBook(bookDiv, bookId){
+    // Remove bookDiv from DOM
+    bookDiv.remove()
+
+    // Save last book in extra index
+    myLibrary[0] = myLibrary[myLibrary.length-1]; 
+
+    // Copy book to delete to last index
+    myLibrary[myLibrary.length-1] = myLibrary[bookId];
+    
+    // Copy book in extra index over book to delete
+    myLibrary[bookId] = myLibrary[0];
+
+    // Delete last index
+    myLibrary.pop();
+    
+    // Clean extra index
+    myLibrary[0] = '';
+}
+
+// Display all local storage saved books on first load
+function displayAllBooks(){
+    for (let book in myLibrary){
+        if(book!=0){
+            displayBook(book);
+        }
+    }
 }
 
 // input
@@ -47,6 +77,9 @@ const inputState = document.getElementById('state');
 const submitBtn = document.getElementById('submitBtn');
 
 // Main
+
+// check local storage and run displayAllBooks() based on it
+
 submitBtn.addEventListener('click', ()=>{
     addBookToLibrary(inputTitle.value, inputAuthor.value, inputPages.value, inputState.value);
     inputTitle.value = '';
@@ -59,6 +92,3 @@ submitBtn.addEventListener('click', ()=>{
 });
 
 
-
-// let book1 = new book('Road to Azaroth', 'Ravin Enger', 300, 'finished');
-// console.log(book1.info());
