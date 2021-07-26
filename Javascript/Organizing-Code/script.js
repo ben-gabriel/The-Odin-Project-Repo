@@ -24,7 +24,7 @@ const booksDisplay = document.getElementById('booksDisplay');
 function displayBook(book){
     let newDiv = document.createElement('div');
     newDiv.innerHTML = `
-        <button class="deleteBtn">X</button>
+        <button class="deleteBtn"></button>
         <h1>${myLibrary[book].title}</h1>
         <h3>${myLibrary[book].author}</h3>
         <h3>${myLibrary[book].pages} pages</h3>    
