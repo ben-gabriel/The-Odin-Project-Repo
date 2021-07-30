@@ -29,6 +29,13 @@
     border-radius: var(--border-radius);
 }
 
+.player1{
+    background: green;
+}
+.player2{
+    background: rebeccapurple;
+}
+
 #cell1{
     grid-area: cell1;
     border-right: var(--border);
