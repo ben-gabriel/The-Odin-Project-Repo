@@ -57,3 +57,6 @@ const gameboard = (
         return{getCurrent, reset};
     }
 )();
+
+
+// PLAYERS MUST CLICK A CELL IN GAMEBOARD OBJ VIA FUNCTION
