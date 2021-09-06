@@ -1,12 +1,18 @@
 const fs = require('fs');
 const http = require('http');
-const url = require('url');
+const event = require('events');
+
+const myEventEmitter = new event.EventEmitter;
+myEventEmitter.on('pageSent',()=>{
+    console.log('pageSent event recieved');
+})
 
 http.createServer((req, res)=>{
     res.writeHead(200, {'Content-Type': 'text/html'});
     
     let reqPath = req.url;
-    console.log('requestes path ==== '+reqPath);
+    console.log('requested path ==== '+reqPath);
+
     if(reqPath == '/'){
         reqPath = '/index'
     }
@@ -23,4 +29,5 @@ http.createServer((req, res)=>{
         res.end();
     });
 
+    myEventEmitter.emit('pageSent');
 }).listen(8080);
