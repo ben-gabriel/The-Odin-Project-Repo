@@ -6,12 +6,15 @@ http.createServer((req, res)=>{
     
     let requestedPath = req.url;
     console.log('requested path ==== '+requestedPath);
+    
+    var dotoffset = requestedPath.lastIndexOf('.');
+    console.log('dotoffset = ' + dotoffset);
 
     if(requestedPath == '/'){
         requestedPath = '/index'
     }
 
-    fs.readFile('.'+requestedPath+'.html', function(err, data) {
+    fs.readFile('.'+requestedPath+'html', function(err, data) {
         
         if (err) {
             console.log(err);
@@ -38,4 +41,5 @@ http.createServer((req, res)=>{
 
     });
 
-}).listen(8080);
+    
+}).listen(2404);
