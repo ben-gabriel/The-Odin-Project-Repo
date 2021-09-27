@@ -14,7 +14,7 @@ http.createServer((req, res)=>{
         requestedPath = '/index'
     }
 
-    fs.readFile('.'+requestedPath+'html', function(err, data) {
+    fs.readFile('.'+requestedPath+'.html', function(err, data) {
         
         if (err) {
             console.log(err);
