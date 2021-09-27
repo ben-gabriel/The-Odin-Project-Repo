@@ -45,7 +45,12 @@ http.createServer((request, response)=>{
 
     fs.readFile(filePath, (error, data)=>{
         if(error){
-            console.log('Error: ', error);
+            console.log('Error Reading File: ', error);
+            response.writeHead(404, {'Content-Type': 'text/html'})
+            fs.readFile('./404/404.html', (error, data)=>{
+                response.write(data);
+                response.end()  
+            });  
         }
         else{
             response.writeHead(200, {'Content-Type': mimeTypes[requestExtname]});
