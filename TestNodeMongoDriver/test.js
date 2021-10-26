@@ -15,7 +15,9 @@ async function main(){
         await listDatabases(client);
 
         //Crud Operations
-        await createDocument(client, 'testDb1', 'collection1', {name:'Sarah'});
+        //await createOneDocument(client, 'testDb1', 'collection1', {name:'Sarah'});
+
+        await findOneDocument(client,'testDb1', 'collection1','racheal');
 
     }catch (e){
         console.error(e);
@@ -34,10 +36,22 @@ async function listDatabases(client){
     });
 }
 
-async function createDocument(client, database, collection, newDocument){
-    const result = await client.db(database).collection(collection).insertOne(newDocument);
+async function createOneDocument(client, database, collection, newDocument){
+    const result = await client.db(database).collection(collection).insertOn(newDocument);
 
     console.log(`New Document Created, _ID: ${result.insertedId}`);
+}
+
+async function findOneDocument(client, database, collection, parameter={}){
+    const result = await client.db(database).collection(collection).findOne({name:parameter});
+
+    if(result){
+        console.log(`: `);
+        console.log(result);
+    }
+    else{
+        console.log(`Document with parameter name ${parameter} not found`);
+    }
 }
 
 main().catch(console.error);
