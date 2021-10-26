@@ -1,7 +1,7 @@
 // Tutorial mongoDB https://www.youtube.com/watch?v=fbYExfeFsI0&t=515s&ab_channel=MongoDB
 //Create the client class
 const {MongoClient} = require('mongodb');
-// ↑ = const MongoClient = requite('mongodb').MongoClient;
+// ↑ = const MongoClient = require('mongodb').MongoClient;
 
 async function main(){
 
@@ -17,7 +17,8 @@ async function main(){
         //Crud Operations
         //await createOneDocument(client, 'testDb1', 'collection1', {name:'Sarah'});
 
-        await findOneDocument(client,'testDb1', 'collection1','racheal');
+        //await findOneDocument(client,'testDb1', 'collection1','racheal');
+        await findManyDocuments(client, 'testDb1', 'collection1', 10)
 
     }catch (e){
         console.error(e);
@@ -52,6 +53,14 @@ async function findOneDocument(client, database, collection, parameter={}){
     else{
         console.log(`Document with parameter name ${parameter} not found`);
     }
+}
+
+async function findManyDocuments(client, database, collection1, limit){
+    const cursor = await client.db(database).collection(collection1).find().limit(limit).sort({name:1});
+    
+    const result = await cursor.toArray();
+    console.log(result);
+
 }
 
 main().catch(console.error);
