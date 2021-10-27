@@ -4,13 +4,19 @@ const express = require('express');
 const app = express();
 const port = 2404
     
+const documentsAmount = 5;
+let documentsData = '';
+
 app.get('/', (req, res)=> {
     // res.sendFile(path.join(__dirname,'/index.html'));
 
     res.set('content-type', 'text/html')
 
     fs.readFile('./index.html', (error, data)=>{
-        res.send(data);
+        for (let index = 0; index < documentsAmount; index++) {
+            documentsData = documentsData + `<h2>document n${index}</h2>`;
+        }
+        res.send('<h1>Title</h1>'+data+'<br>'+documentsData);
     });
 
 });

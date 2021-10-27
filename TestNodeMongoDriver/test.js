@@ -18,7 +18,11 @@ async function main(){
         //await createOneDocument(client, 'testDb1', 'collection1', {name:'Sarah'});
 
         //await findOneDocument(client,'testDb1', 'collection1','racheal');
-        await findManyDocuments(client, 'testDb1', 'collection1', 10)
+        //await findManyDocuments(client, 'testDb1', 'collection1', 10);
+
+        //await updateOneDocument(client,'testDb1', 'collection1', {name:'Jesica'},{age:32});
+
+        
 
     }catch (e){
         console.error(e);
@@ -55,11 +59,16 @@ async function findOneDocument(client, database, collection, parameter={}){
     }
 }
 
-async function findManyDocuments(client, database, collection1, limit){
-    const cursor = await client.db(database).collection(collection1).find().limit(limit).sort({name:1});
+async function findManyDocuments(client, database, collection, limit){
+    const cursor = await client.db(database).collection(collection).find().limit(limit).sort({name:1});
     
     const result = await cursor.toArray();
     console.log(result);
+
+}
+
+async function updateOneDocument(client, database, collection, queryObj, updateObj){
+    const result = await client.db(database).collection(collection).updateOne(queryObj, {$set: updateObj});
 
 }
 
