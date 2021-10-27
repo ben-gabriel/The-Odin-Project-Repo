@@ -15,14 +15,17 @@ async function main(){
         await listDatabases(client);
 
         //Crud Operations
-        //await createOneDocument(client, 'testDb1', 'collection1', {name:'Sarah'});
+        await createOneDocument(client, 'testDb1', 'collection1', {name:'Rachel'});
 
-        //await findOneDocument(client,'testDb1', 'collection1','racheal');
-        //await findManyDocuments(client, 'testDb1', 'collection1', 10);
+        //await findOneDocument(client,'testDb1', 'collection1','Rachel');
+        await findManyDocuments(client, 'testDb1', 'collection1', 10);
 
-        //await updateOneDocument(client,'testDb1', 'collection1', {name:'Jesica'},{age:32});
+        await updateOneDocument(client,'testDb1', 'collection1', {name:'Rachel'},{age:35});
 
-        
+        await findOneDocument(client,'testDb1', 'collection1','Rachel');
+
+        await deleteOneDocument(client,'testDb1', 'collection1', {name:'Rachel'})
+
 
     }catch (e){
         console.error(e);
@@ -37,12 +40,12 @@ async function listDatabases(client){
     
     console.log('Databases: ');
     databasesList.databases.forEach(db => {
-        console.log(`- ${db.name}`);
+        console.log(`- ${db.name} `);
     });
 }
 
 async function createOneDocument(client, database, collection, newDocument){
-    const result = await client.db(database).collection(collection).insertOn(newDocument);
+    const result = await client.db(database).collection(collection).insertOne(newDocument);
 
     console.log(`New Document Created, _ID: ${result.insertedId}`);
 }
@@ -69,6 +72,14 @@ async function findManyDocuments(client, database, collection, limit){
 
 async function updateOneDocument(client, database, collection, queryObj, updateObj){
     const result = await client.db(database).collection(collection).updateOne(queryObj, {$set: updateObj});
+
+    console.log(`\n${result.matchedCount} Matched document/s, ${result.modifiedCount} Modified.`);
+}
+
+async function deleteOneDocument(client, database, collection, queryObj = {}){
+    const result = await client.db(database).collection(collection).deleteOne(queryObj);
+
+    console.log(`${result.deletedCount} Document/s deleted`);
 
 }
 
