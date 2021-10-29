@@ -1,0 +1,107 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+body{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgb(228, 235, 236);
+}
+
+.postPreview{
+    max-width: 600px;
+}
+
+.postPreview{
+    background: rgb(243, 251, 255);
+    position:absolute;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+    border: 1px solid rgb(179, 177, 177);
+    border-radius: 0.5em;
+    box-shadow: 0 0 1px 0px black;
+
+    font-family: spartan;
+
+}
+.postPreview > *{
+    margin: 0;
+    padding: 0.5em 0.7em;
+
+}
+
+/* parts */
+
+.previewHeader > *{
+    padding: 0.1em 0;
+}
+
+.authorBanner{
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    gap: 0.5em;
+
+    font-size: small;
+}
+
+.previewContent{
+    background: rgba(219, 148, 98, 0.164);
+}
+
+.previewFooter{
+
+}
+
+.shareBtn{
+    background: rgba(219, 148, 98, 0.164);
+    
+    border: none;
+    
+    padding: 0.5em 1em;
+
+    color: grey;
+
+    border-radius: 0.3em;
+
+}
+.shareBtn:hover{    
+    background: rgba(219, 148, 98, 0.363);
+
+    border-radius: 0.2em;
+
+    transition: all 0.15s;
+}
+.shareBtn:active{
+    background: rgba(128, 84, 53, 0.637);;
+    border-radius: 0.2em;
+    color: whitesmoke;
+}
+
+.btn2{    
+    background: hsl(0, 0%, 100%);
+
+    border: hsl(0, 0%, 90%) 3px solid;
+    border-radius: 1.75em;
+    box-shadow: 0px 4px 0px 0px hsl(0, 0%, 90%);
+    /* transform: translate(10px, -7px) */
+    
+    font-family: 'Varela Round';
+    font-weight: bolder;
+    color: hsl(0, 0%, 70%);
+
+    transition: all 0.25s;
+}
+.btn2:hover{
+    background: hsl(0, 0%, 95%);
+    transition: all 0.25s;
+}
+.btn2:active{
+    box-shadow: 0px 0px 0px 0px rgb(255, 255, 255);
+    transform: translate(0px, 3px);  
+}
