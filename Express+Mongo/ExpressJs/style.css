@@ -3,10 +3,11 @@
     padding: 0;
 }
 body{
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     background: rgb(228, 235, 236);
 }
 
@@ -16,7 +17,7 @@ body{
 
 .postPreview{
     background: rgb(243, 251, 255);
-    position:absolute;
+    position:relative;
 
     display: flex;
     flex-direction: column;

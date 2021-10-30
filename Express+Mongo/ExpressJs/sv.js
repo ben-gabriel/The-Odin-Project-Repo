@@ -3,14 +3,29 @@ const app = express();
 const port = 2404;
 
 const fs = require('fs');
-const wdir = './ExpressJs';
+const { nextTick } = require('process');
+const wdir = './ExpressJs'; // working directory
 
-app.use(express.urlencoded({extended:true}));
+
+app.use(express.urlencoded({extended:true})); // middleware to parse body
+app.use((req, res, next)=>{
+    console.log(req.originalUrl);
+    next()   
+});
+
 
 app.get('/',(req, res)=>{    
 
     fs.readFile(wdir+'/index.html', function(error, content){
         res.set('Content-Type', 'text/html')
+        res.send(content)
+    });
+
+});
+app.get('/style.css',(req, res)=>{    
+
+    fs.readFile(wdir+'/style.css', function(error, content){
+        res.set('Content-Type', 'text/css')
         res.send(content)
     });
 
