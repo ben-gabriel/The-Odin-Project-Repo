@@ -22,9 +22,16 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '/views'));
 
 // -------- Routes
+const postData = {
+    postTitle: 'I Dont Like Sand',
+    postAuthor: 'Anakin',
+    postDate: '20/05/2003',
+    postContent: "I don't like sand. It's coarse and rough and irritating and it gets everywhere."
+}
+
 app.get('/',(req, res)=>{    
 
-    res.render('index', {postTitle: 'My very own post title'})
+    res.render('index', postData);
 
 });
 

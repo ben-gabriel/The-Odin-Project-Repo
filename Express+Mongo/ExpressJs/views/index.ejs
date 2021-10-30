@@ -29,25 +29,16 @@
     <div class="postPreview">
 
         <section class="previewHeader">
-            <h1 class="title"><%= postTitle %></h1>
+            <h1 class="title"><%= locals.postTitle || 'Post Title' %></h1>
             
             <section class="authorBanner">
-                <a href="" class="userTag">Author</a> 
-                <p>Date Posted</p>
+                <a href="" class="userTag"><%= locals.postAuthor || 'postAuthor' %></a> 
+                <p><%= locals.postDate || '04/12/2020' %></p>
             </section>
         </section>
 
         <section class="previewContent">
-            <p>Post Content: Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-                Ipsam adipisci quo eligendi, nesciunt eius, consectetur error delectus
-                aut cupiditate libero natus id odit, maxime officiis odio pariatur 
-                Post Content: Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-                Ipsam adipisci quo eligendi, nesciunt eius, consectetur error delectus
-                aut cupiditate libero natus id odit, maxime officiis odio pariatur 
-                Post Content: Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-                Ipsam adipisci quo eligendi, nesciunt eius, consectetur error delectus
-                aut cupiditate libero natus id odit, maxime officiis odio pariatur 
-                enim explicabo quod.
+            <p><%= locals.postContent || 'Content' %>
             </p>
         </section>
 
