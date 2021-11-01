@@ -55,6 +55,8 @@ app.get('/style.css',(req, res)=>{
 app.post('/', (req, res)=>{    
     console.log(req.body);
 
+    postData.push(req.body)
+
     res.redirect('/')
 
 });

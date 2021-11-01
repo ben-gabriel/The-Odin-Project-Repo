@@ -26,8 +26,25 @@
         <input type="submit" value="Submit">
     </form> -->
 
+    <form action="/" method="post">
+        <label for="postTitle"> Title </label>
+        <input type="text" id="fTitle" name="postTitle">
+        
+        <label for="postAuthor"> Author </label>
+        <input type="text" id="fAuthor" name="postAuthor">
+        
+        <label for="postDate"> Date</label>
+        <input type="text" id="fDate" name="postDate">
+        
+        <label for="postContent"> Content</label>
+        <input type="text" id="fContent" name="postContent">
+
+        <input type="submit" value="Submit">
+    </form>
+
     <% if (postData.length>0) { %>
         <% postData.forEach(post => { %>
+            <br>
             
             <div class="postPreview">
 
@@ -50,7 +67,6 @@
                 </section>
 
             </div>
-        
         <% }) %>
     <% } %>
 
