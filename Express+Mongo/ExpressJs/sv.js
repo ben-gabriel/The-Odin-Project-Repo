@@ -92,6 +92,9 @@ async function database(insert, flag=0){
 
 async function createOneDocument(client, database, collection, newDocument){
     newDocument._id = Date.now()
+    let mydate = new Date();
+    newDocument.postDate = `${mydate.getDay()}/${mydate.getMonth()}/${mydate.getFullYear()} - ${mydate.getHours()}:${mydate.getMinutes()}`;
+
     const result = await client.db(database).collection(collection).insertOne(newDocument);
 
     console.log(`New Document Created, _ID: ${result.insertedId}`);
@@ -104,3 +107,4 @@ async function findManyDocuments(client, database, collection, limit=100){
     console.log('log inside findMany' , result);
     return result
 }
+
