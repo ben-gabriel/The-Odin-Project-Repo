@@ -25,14 +25,10 @@ app.set('views', path.join(__dirname, '/views'));
 
 // -------- Routes
 app.get('/',(req, res)=>{    
-    console.log('log in / ', database({},1).then((postData)=>{
-
-            console.log('test in get / ', postData);
+    
+    database({},1).then((postData)=>{
             res.render('index', {postData});
-
-        })
-        
-    );
+    });
 
 });
 
@@ -48,7 +44,14 @@ app.get('/style.css',(req, res)=>{
 app.post('/', (req, res)=>{    
     console.log(req.body);
 
-    database(req.body).catch(console.error);
+    if(req.body._id){
+        let query = Number(req.body._id);
+        database({_id : query}, -1).catch(console.error);
+    }
+    else{
+        console.log('log in else post')
+        // database(req.body).catch(console.error);
+    }
 
     res.redirect('/')
 
@@ -69,6 +72,9 @@ async function database(insert, flag=0){
     const db = 'quotesBlog';
     const collection = 'posts';
 
+    
+    
+
     try {
         await client.connect();
 
@@ -76,9 +82,12 @@ async function database(insert, flag=0){
         if(flag==0){
             await createOneDocument(client, db, collection, insert);
         }
+        else if(flag == (-1)){
+            await deleteOneDocument(client,db,collection, insert);
+        }
         else{
             const result = await findManyDocuments(client, db, collection);
-            console.log('log inside database(): ', result)
+            // console.log('log inside database(): ', result)
             return result
         }
 
@@ -104,7 +113,13 @@ async function findManyDocuments(client, database, collection, limit=100){
     const cursor = await client.db(database).collection(collection).find().limit(limit).sort({_id:-1});
     
     const result = await cursor.toArray();
-    console.log('log inside findMany' , result);
+    // console.log('log inside findMany' , result);
     return result
 }
 
+async function deleteOneDocument(client, database, collection, queryObj = {}){
+    const result = await client.db(database).collection(collection).deleteOne(queryObj);
+
+    console.log(`${result.deletedCount} Document/s deleted`);
+
+}
