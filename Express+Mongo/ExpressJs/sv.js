@@ -91,13 +91,14 @@ async function database(insert, flag=0){
 }
 
 async function createOneDocument(client, database, collection, newDocument){
+    newDocument._id = Date.now()
     const result = await client.db(database).collection(collection).insertOne(newDocument);
 
     console.log(`New Document Created, _ID: ${result.insertedId}`);
 }
 
 async function findManyDocuments(client, database, collection, limit=100){
-    const cursor = await client.db(database).collection(collection).find().limit(limit).sort({name:1});
+    const cursor = await client.db(database).collection(collection).find().limit(limit).sort({_id:-1});
     
     const result = await cursor.toArray();
     console.log('log inside findMany' , result);

@@ -33,9 +33,6 @@
         <label for="postAuthor"> Author </label>
         <input type="text" id="fAuthor" name="postAuthor">
         
-        <label for="postDate"> Date</label>
-        <input type="text" id="fDate" name="postDate">
-        
         <label for="postContent"> Content</label>
         <input type="text" id="fContent" name="postContent">
 
@@ -64,6 +61,10 @@
 
                 <section class="previewFooter">
                     <button class="shareBtn">Share</button>
+                    <form action="/" method="post">
+                        <input type="hidden" name="_id" value=<%= post._id %> />
+                        <input type="submit" value="Delete" class="shareBtn">
+                    </form>
                 </section>
 
             </div>
