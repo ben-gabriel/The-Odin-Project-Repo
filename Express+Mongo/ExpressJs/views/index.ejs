@@ -36,6 +36,9 @@
         <label for="postContent"> Content</label>
         <input class='txtInput' type="text" id="fContent" name="postContent">
 
+        <label for="postImg"> Image Link</label>
+        <input class='txtInput' type="text" id="fImg" name="postImg">
+
         <input class='btn' type="submit" value="Submit">
     </form>
 
@@ -55,8 +58,10 @@
                 </section>
 
                 <section class="previewContent">
-                    <p><%= post.postContent || 'Content' %>
+                    <img src=<%= post.postImg || 'https://i.5' %> alt="" srcset="">
+                    <p><%= post.postContent || '' %>
                     </p>
+                    <br>
                 </section>
 
                 <section class="previewFooter">
