@@ -50,7 +50,7 @@ app.post('/', (req, res)=>{
     }
     else{
         console.log('log in else post')
-        // database(req.body).catch(console.error);
+        database(req.body).catch(console.error);
     }
 
     res.redirect('/')

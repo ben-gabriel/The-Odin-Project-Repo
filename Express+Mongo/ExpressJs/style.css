@@ -1,6 +1,7 @@
 * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 body{
     min-height: 100vh;
@@ -12,7 +13,8 @@ body{
 }
 
 .postPreview{
-    max-width: 600px;
+    width: 600px;
+
 }
 
 .postPreview{
@@ -56,10 +58,11 @@ body{
 }
 
 .previewFooter{
-
+    display: flex;
+    gap: 1em;
 }
 
-.shareBtn{
+.btn{
     background: rgba(219, 148, 98, 0.164);
     
     border: none;
@@ -71,38 +74,72 @@ body{
     border-radius: 0.3em;
 
 }
-.shareBtn:hover{    
+.btn:hover{    
     background: rgba(219, 148, 98, 0.363);
 
     border-radius: 0.2em;
 
     transition: all 0.15s;
 }
-.shareBtn:active{
+.btn:active{
     background: rgba(128, 84, 53, 0.637);;
     border-radius: 0.2em;
     color: whitesmoke;
 }
 
-.btn2{    
-    background: hsl(0, 0%, 100%);
 
-    border: hsl(0, 0%, 90%) 3px solid;
-    border-radius: 1.75em;
-    box-shadow: 0px 4px 0px 0px hsl(0, 0%, 90%);
-    /* transform: translate(10px, -7px) */
+/*----- new post form -----*/
+.newPostForm{
+    background: rgb(243, 251, 255);
+    position: relative;
+
+    width: 600px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     
-    font-family: 'Varela Round';
-    font-weight: bolder;
-    color: hsl(0, 0%, 70%);
+    border: 1px solid rgb(179, 177, 177);
+    border-radius: 0.5em;
+    box-shadow: 0 0 1px 0px black;
 
-    transition: all 0.25s;
+    font-family: spartan;
+
+    margin: 0;
+    padding: 0.5em 0.7em;
 }
-.btn2:hover{
-    background: hsl(0, 0%, 95%);
-    transition: all 0.25s;
+.newPostForm > *{
+    padding: 0.5em;
 }
-.btn2:active{
-    box-shadow: 0px 0px 0px 0px rgb(255, 255, 255);
-    transform: translate(0px, 3px);  
+
+.newPostForm  .btn{
+    margin: 1em 0;
+}
+
+.txtInput{
+    border-radius: 2em;
+    border: none;
+    outline: none;
+    box-shadow: inset 0 0 1px 1px rgb(179, 177, 177);
+    font-family: spartan;
+}
+.txtInput:hover{    
+    background: rgba(216, 194, 178, 0.363);
+
+    border: none;
+
+    border-radius: 0.2em;
+
+    transition: all 0.15s;
+}
+.txtInput:active{
+    background: rgba(128, 84, 53, 0.637);;
+    outline: none;
+    border: none;
+    border-radius: 0.2em;
+    color: whitesmoke;
+}
+.txtInput:focus{
+    outline: none;
+    border: none;
 }

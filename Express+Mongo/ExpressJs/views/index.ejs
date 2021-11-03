@@ -26,17 +26,17 @@
         <input type="submit" value="Submit">
     </form> -->
 
-    <form action="/" method="post">
+    <form class='newPostForm' action="/" method="post">
         <label for="postTitle"> Title </label>
-        <input type="text" id="fTitle" name="postTitle">
+        <input class='txtInput' type="text" id="fTitle" name="postTitle">
         
         <label for="postAuthor"> Author </label>
-        <input type="text" id="fAuthor" name="postAuthor">
+        <input class='txtInput' type="text" id="fAuthor" name="postAuthor">
         
         <label for="postContent"> Content</label>
-        <input type="text" id="fContent" name="postContent">
+        <input class='txtInput' type="text" id="fContent" name="postContent">
 
-        <input type="submit" value="Submit">
+        <input class='btn' type="submit" value="Submit">
     </form>
 
     <% if (postData.length>0) { %>
@@ -50,7 +50,7 @@
                     
                     <section class="authorBanner">
                         <a href="" class="userTag"><%= post.postAuthor || 'postAuthor' %></a> 
-                        <p><%= post.postDate || '04/12/2020' %></p>
+                        <p><%= post.postDate || 'Not Declared' %></p>
                     </section>
                 </section>
 
@@ -60,10 +60,10 @@
                 </section>
 
                 <section class="previewFooter">
-                    <button class="shareBtn">Share</button>
+                    <button class="btn">Share</button>
                     <form action="/" method="post">
                         <input type="hidden" name="_id" value=<%= post._id %> />
-                        <input type="submit" value="Delete" class="shareBtn">
+                        <input type="submit" value="Delete" class="btn">
                     </form>
                 </section>
 
