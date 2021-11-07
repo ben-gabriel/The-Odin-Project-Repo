@@ -57,6 +57,16 @@ app.post('/', (req, res)=>{
 
 });
 
+app.get('/post/:id', (req, res)=>{
+
+    console.log(req.params.id);
+    res.send('post with id: '+ req.params.id);
+});
+
+app.use((req, res)=>{
+    res.status(404).send('404')
+    console.log('error?');
+});
 
 app.listen(port);
 console.log(`Server Listening in Port ${port}`);

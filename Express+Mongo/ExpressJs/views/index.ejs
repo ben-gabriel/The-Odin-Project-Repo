@@ -26,6 +26,8 @@
         <input type="submit" value="Submit">
     </form> -->
 
+    <div class="bodyBuffer"><br><br></div>
+
     <form class='newPostForm' action="/" method="post">
         <label for="postTitle"> Title </label>
         <input class='txtInput' type="text" id="fTitle" name="postTitle">
@@ -76,6 +78,13 @@
         <% }) %>
     <% } %>
 
+    
+    <div class="bodyBuffer">
+        <br>
+        <!-- <h1><%= postData[0].postAuthor || 2+2  %></h1> -->
+        <%- include('./partials/footer.ejs') %>
+        <br>
+    </div>
 
 <!-- 
     <div class="postPreview">
