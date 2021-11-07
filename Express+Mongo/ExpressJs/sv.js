@@ -64,8 +64,8 @@ app.get('/post/:id', (req, res)=>{
 });
 
 app.use((req, res)=>{
-    res.status(404).send('404')
-    console.log('error?');
+    res.status(404).render('404');
+    console.log('error? 404');
 });
 
 app.listen(port);

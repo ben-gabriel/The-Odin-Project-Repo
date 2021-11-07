@@ -26,7 +26,7 @@
         <input type="submit" value="Submit">
     </form> -->
 
-    <div class="bodyBuffer"><br><br></div>
+    <%- include('./partials/header.ejs') %>
 
     <form class='newPostForm' action="/" method="post">
         <label for="postTitle"> Title </label>
@@ -63,7 +63,6 @@
                     <img src=<%= post.postImg || 'https://i.5' %> alt="" srcset="">
                     <p><%= post.postContent || '' %>
                     </p>
-                    <br>
                 </section>
 
                 <section class="previewFooter">
@@ -78,13 +77,8 @@
         <% }) %>
     <% } %>
 
-    
-    <div class="bodyBuffer">
-        <br>
-        <!-- <h1><%= postData[0].postAuthor || 2+2  %></h1> -->
-        <%- include('./partials/footer.ejs') %>
-        <br>
-    </div>
+    <%- include('./partials/footer.ejs') %>
+
 
 <!-- 
     <div class="postPreview">
