@@ -4,7 +4,13 @@ const router = express.Router();
 router.use(express.urlencoded({extended:false}));
 
 router.get('/new', (req, res)=>{
-    res.send('new post form here');
+    res.render('newPost');
+});
+
+const database = require('../database.js');
+router.post('/new', (req,res)=>{
+    database(req.body);
+    res.redirect('/');
 });
 
 router.get('/:id', (req, res)=>{

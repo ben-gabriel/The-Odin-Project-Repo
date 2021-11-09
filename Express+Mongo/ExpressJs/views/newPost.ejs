@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/head.ejs') %>
+</head>
+<body>
+    
+    <%- include('./partials/header.ejs') %>
+
+    <form class='newPostForm' action="/posts/new" method="post">
+        <label for="postTitle"> Title </label>
+        <input class='txtInput' type="text" id="fTitle" name="postTitle">
+        
+        <label for="postAuthor"> Author </label>
+        <input class='txtInput' type="text" id="fAuthor" name="postAuthor">
+        
+        <label for="postContent"> Content</label>
+        <input class='txtInput' type="text" id="fContent" name="postContent">
+
+        <label for="postImg"> Image Link</label>
+        <input class='txtInput' type="text" id="fImg" name="postImg">
+
+        <input class='btn' type="submit" value="Submit">
+    </form>
+
+    <%- include('./partials/footer.ejs') %>
+
+</body>
+</html>
