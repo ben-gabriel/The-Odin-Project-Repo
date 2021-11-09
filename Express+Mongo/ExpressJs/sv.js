@@ -112,7 +112,7 @@ async function database(insert, flag=0){
 async function createOneDocument(client, database, collection, newDocument){
     newDocument._id = Date.now()
     let mydate = new Date();
-    newDocument.postDate = `${mydate.getDay()}/${mydate.getMonth()}/${mydate.getFullYear()} - ${mydate.getHours()}:${mydate.getMinutes()}`;
+    newDocument.postDate = `${mydate.getUTCDate()}/${mydate.getUTCMonth()}/${mydate.getFullYear()} - ${mydate.getHours()}:${mydate.getMinutes()}`;
 
     const result = await client.db(database).collection(collection).insertOne(newDocument);
 
