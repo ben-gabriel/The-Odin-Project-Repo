@@ -57,19 +57,17 @@ app.post('/', (req, res)=>{
 
 });
 
-app.get('/post/:id', (req, res)=>{
+// express.Router()
+const postsRouter = require('./routes/posts');
+app.use('/posts', postsRouter);
 
-    console.log(req.params.id);
-    res.send('post with id: '+ req.params.id);
-});
+app.listen(port);
+console.log(`Server Listening in Port ${port}`);
 
 app.use((req, res)=>{
     res.status(404).render('404');
     console.log('error? 404');
 });
-
-app.listen(port);
-console.log(`Server Listening in Port ${port}`);
 
 
 //Database
@@ -81,9 +79,6 @@ async function database(insert, flag=0){
 
     const db = 'quotesBlog';
     const collection = 'posts';
-
-    
-    
 
     try {
         await client.connect();
