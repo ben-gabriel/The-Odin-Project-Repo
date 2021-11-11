@@ -15,6 +15,7 @@ async function database(insert, flag=0){
         //Crud Operations
         if(flag==0){
             await createOneDocument(client, db, collection, insert);
+            return 99999
         }
         else if(flag == (-1)){
             await deleteOneDocument(client,db,collection, insert);
@@ -34,13 +35,19 @@ async function database(insert, flag=0){
 }
 
 async function createOneDocument(client, database, collection, newDocument){
+    
+    console.log("console.log inside createone ", newDocument)
+    
+    
     newDocument._id = Date.now()
     let mydate = new Date();
     newDocument.postDate = `${mydate.getUTCDate()}/${mydate.getUTCMonth()}/${mydate.getFullYear()} - ${mydate.getHours()}:${mydate.getMinutes()}`;
 
     const result = await client.db(database).collection(collection).insertOne(newDocument);
 
-    console.log(`New Document Created, _ID: ${result.insertedId}`);
+    // console.log(`New Document Created, _ID: ${result.insertedId}`);
+    console.log("console.log inside createone ", result.insertedId)
+    return result.insertedId;
 }
 
 async function findManyDocuments(client, database, collection, limit=100){
@@ -48,7 +55,7 @@ async function findManyDocuments(client, database, collection, limit=100){
     
     const result = await cursor.toArray();
     // console.log('log inside findMany' , result);
-    return result
+    return 99999
 }
 
 async function deleteOneDocument(client, database, collection, queryObj = {}){
