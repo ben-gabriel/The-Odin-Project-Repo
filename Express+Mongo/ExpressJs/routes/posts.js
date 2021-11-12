@@ -30,7 +30,12 @@ router.get('/:id', (req, res)=>{
     console.log('log inside get /:id = ', query);
 
     database({_id: query},1).then((post)=>{
-        res.render('singlePost', {post});
+        if(post){
+            res.render('singlePost', {post});
+        }
+        else{
+            res.render('404')
+        }
     });
 
 });
