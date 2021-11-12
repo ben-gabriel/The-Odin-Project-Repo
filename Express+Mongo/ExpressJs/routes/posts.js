@@ -23,6 +23,19 @@ router.post('/new', (req,res)=>{
 
 });
 
+router.post('/delete', (req,res)=>{
+    
+    if(req.body._id){
+        let query = Number(req.body._id);
+        database({_id : query}, -1).catch(console.error);
+        res.redirect('/');
+    }
+    else{
+        res.redirect('/');
+    }
+
+});
+
 router.get('/:id', (req, res)=>{
     // res.send('post with id: ' + req.params.id + ' here');
     let query = Number(req.params.id);
