@@ -4,20 +4,8 @@
     <%- include('./partials/head.ejs') %>
 </head>
 <body>
-
-    <!-- <h1>Title</h1>
-    <form action="/" method="post">
-        <label for="name">First name:</label><br>
-        <input type="text" id="name" name="name"><br>
-        
-        <label for="age">Age:</label><br>
-        <input type="text" id="age" name="age">
-
-        <input type="submit" value="Submit">
-    </form> -->
-
+    
     <%- include('./partials/header.ejs') %>
-
 
     <% if (postData.length>0) { %>
         <% postData.forEach(post => { %>
@@ -29,8 +17,8 @@
                     <h1 class="title"><%= post.postTitle || 'Post Title' %></h1>
                     
                     <section class="authorBanner">
-                        <a href="" class="userTag"><%= post.postAuthor || 'postAuthor' %></a> 
-                        <p><%= post.postDate || 'Not Declared' %></p>
+                        <a href='' class="userTag"><%= post.postAuthor || 'postAuthor' %></a> 
+                        <a href=<%= '/posts/'+ post._id %> > <%= post.postDate || 'Not Declared' %></a>
                     </section>
                 </section>
 
@@ -53,30 +41,6 @@
     <% } %>
 
     <%- include('./partials/footer.ejs') %>
-
-
-<!-- 
-    <div class="postPreview">
-
-        <section class="previewHeader">
-            <h1 class="title"><%= locals.postTitle || 'Post Title' %></h1>
-            
-            <section class="authorBanner">
-                <a href="" class="userTag"><%= locals.postAuthor || 'postAuthor' %></a> 
-                <p><%= locals.postDate || '04/12/2020' %></p>
-            </section>
-        </section>
-
-        <section class="previewContent">
-            <p><%= locals.postContent || 'Content' %>
-            </p>
-        </section>
-
-        <section class="previewFooter">
-            <button class="shareBtn">Share</button>
-        </section>
-
-    </div> -->
 
 </body>
 </html>

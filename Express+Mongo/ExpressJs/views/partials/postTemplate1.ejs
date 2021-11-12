@@ -5,7 +5,7 @@
         
         <section class="authorBanner">
             <a href="" class="userTag"><%= post.postAuthor || 'postAuthor' %></a> 
-            <p><%= post.postDate || 'Not Declared' %></p>
+            <a href=<%= '/posts/'+ post._id %> > <%= post.postDate || 'Not Declared' %></a>
         </section>
     </section>
 
