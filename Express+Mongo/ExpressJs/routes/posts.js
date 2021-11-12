@@ -10,23 +10,29 @@ router.get('/new', (req, res)=>{
 const database = require('../database.js');
 router.post('/new', (req,res)=>{
     
-    let myvar = 123456;
-    console.log('my var 1 = ' + myvar);
+    let postId = 0;
+    let newPost = database(req.body);
 
-    myvar = database(req.body);
+    newPost.then(data=>{
+        postId = data;
+        console.log('postId = ', postId)
 
-    console.log('my var 2 ', myvar);
-
-    myvar.then(data=>{
-        console.log('data is ', data)
+        res.redirect('./'+postId);
     })
-
-    res.redirect('./new');
+    
 
 });
 
 router.get('/:id', (req, res)=>{
-    res.send('post with id: ' + req.params._id + ' here');
+    // res.send('post with id: ' + req.params.id + ' here');
+    let query = Number(req.params.id);
+
+    console.log('log inside get /:id = ', query);
+
+    database({_id: query},1).then((post)=>{
+        res.render('singlePost', {post});
+    });
+
 });
 
 module.exports = router;

@@ -14,18 +14,23 @@ async function database(insert, flag=0){
 
         //Crud Operations
         if(flag==0){
-            await createOneDocument(client, db, collection, insert);
-            return 99999
+            //Returns post ID
+            return await createOneDocument(client, db, collection, insert);
         }
         else if(flag == (-1)){
             await deleteOneDocument(client,db,collection, insert);
         }
-        else{
-            const result = await findManyDocuments(client, db, collection);
+        else if(flag == 1){
+            let result = await findOneDocument(client, db, collection, insert);
             // console.log('log inside database(): ', result)
             return result
         }
-
+        else{
+            let result = await findManyDocuments(client, db, collection);
+            // console.log('log inside database(): ', result)
+            return result
+        }
+        
     }catch (e){
         console.error(e);
     }finally{
@@ -50,12 +55,19 @@ async function createOneDocument(client, database, collection, newDocument){
     return result.insertedId;
 }
 
+async function findOneDocument(client, database, collection, insert={}){
+    const result = await client.db(database).collection(collection).findOne(insert);
+    
+    console.log('log inside findMOne' , result);
+    return result
+}
+
 async function findManyDocuments(client, database, collection, limit=100){
     const cursor = await client.db(database).collection(collection).find().limit(limit).sort({_id:-1});
     
     const result = await cursor.toArray();
     // console.log('log inside findMany' , result);
-    return 99999
+    return result
 }
 
 async function deleteOneDocument(client, database, collection, queryObj = {}){
