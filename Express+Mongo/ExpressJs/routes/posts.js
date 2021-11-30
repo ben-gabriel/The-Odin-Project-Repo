@@ -19,7 +19,9 @@ router.post('/new', (req,res)=>{
         console.log('postId = ', postId)
 
         res.redirect('./'+postId);
-    })
+    }).catch(()=>{
+        res.render('404');
+    });
     
 
 });
@@ -28,7 +30,7 @@ router.post('/delete', (req,res)=>{
     
     if(req.body._id){
         let query = Number(req.body._id);
-        database.deleteOneDocument({_id : query}, -1).catch(console.error);
+        database.deleteOneDocument({_id : query}).catch(console.error);
         res.redirect('/');
     }
     else{
