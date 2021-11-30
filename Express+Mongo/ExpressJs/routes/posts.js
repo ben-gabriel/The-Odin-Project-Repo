@@ -7,11 +7,12 @@ router.get('/new', (req, res)=>{
     res.render('newPost');
 });
 
-const database = require('../database.js');
+const {database,testFun} = require('../database.js');
+
 router.post('/new', (req,res)=>{
     
     let postId = 0;
-    let newPost = database(req.body);
+    let newPost = database.createOneDocument(req.body);
 
     newPost.then(data=>{
         postId = data;
@@ -27,7 +28,7 @@ router.post('/delete', (req,res)=>{
     
     if(req.body._id){
         let query = Number(req.body._id);
-        database({_id : query}, -1).catch(console.error);
+        database.deleteOneDocument({_id : query}, -1).catch(console.error);
         res.redirect('/');
     }
     else{
@@ -42,7 +43,7 @@ router.get('/:id', (req, res)=>{
 
     console.log('log inside get /:id = ', query);
 
-    database({_id: query},1).then((post)=>{
+    database.findOneDocument({_id: query}).then((post)=>{
         if(post){
             res.render('singlePost', {post});
         }
