@@ -46,14 +46,14 @@ let database = {
         }
     },
 
-    findManyDocuments: async function(limit=100){
+    findManyDocuments: async function(pageNumber=0, limit=2){
 
         try {
             await client.connect();
-            const cursor = await client.db(db).collection(collection).find().limit(limit).sort({_id:-1});
+            const cursor = await client.db(db).collection(collection).find().limit(limit).sort({_id:-1}).skip(pageNumber);
         
             const result = await cursor.toArray();
-            // console.log('log inside findMany' , result);
+            console.log('log inside findMany()' , result);
             return result;
             
         }catch (e){
@@ -75,7 +75,6 @@ let database = {
         }finally{
             await client.close();
         }
-
     },
 
 }

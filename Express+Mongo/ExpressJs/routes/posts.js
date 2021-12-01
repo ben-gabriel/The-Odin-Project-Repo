@@ -30,11 +30,15 @@ router.post('/delete', (req,res)=>{
     
     if(req.body._id){
         let query = Number(req.body._id);
-        database.deleteOneDocument({_id : query}).catch(console.error);
-        res.redirect('/');
+        database.deleteOneDocument({_id : query}).then(()=>{
+            res.redirect('/');
+            console.log('log inside /posts/delete 1');
+        }).catch(console.error);
     }
     else{
         res.redirect('/');
+        console.log('log inside /posts/delete 2');
+
     }
 
 });

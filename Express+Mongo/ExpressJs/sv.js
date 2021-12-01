@@ -25,10 +25,14 @@ app.set('views', path.join(__dirname, '/views'));
 
 // -------- Routes
 app.get('/',(req, res)=>{    
-    
-    database.findManyDocuments(2).then((postData)=>{
-            res.render('index', {postData});
+
+    console.log('log inside get /1');
+    database.findManyDocuments().then((postData)=>{
+        console.log('log inside get / 2');
+        res.render('index', {postData});
     });
+    console.log('log inside get / 3');
+
 
 });
 
@@ -40,6 +44,24 @@ app.get('/style.css',(req, res)=>{
     });
 
 });
+
+app.get('/favicon.ico',(req, res)=>{    
+
+    fs.readFile(wdir+'/favicon.ico', function(error, content){
+        res.set('Content-Type', 'imgage/png')
+        res.send(content)
+    });
+
+});
+
+app.get('/:pageNumber', (req, res)=>{
+    let pageNumber = Number(req.params.pageNumber);
+    database.findManyDocuments(pageNumber).then((postData)=>{
+        res.render('index', {postData});
+    });
+});
+
+
 
 
 // express.Router()
