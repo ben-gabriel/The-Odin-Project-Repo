@@ -29,6 +29,7 @@ app.get('/',(req, res)=>{
     console.log('log inside get /1');
     database.findManyDocuments().then((postData)=>{
         console.log('log inside get / 2');
+        postData.push({totalAmountPosts:'something'});
         res.render('index', {postData});
     });
     console.log('log inside get / 3');
@@ -57,7 +58,7 @@ app.get('/favicon.ico',(req, res)=>{
 app.get('/page/:pageNumber', (req, res)=>{
 
     let pageNumber = Number(req.params.pageNumber);
-
+    
     if(pageNumber <= 0 ){
         pageNumber = 1;
     }
@@ -86,7 +87,7 @@ app.use('/posts', postsRouter);
 app.listen(port);
 console.log(`Server Listening in Port ${port}`);
 
-// ------ 404
+// -------- 404
 app.use((req, res)=>{
     res.status(404).render('404');
     console.log('error? 404');
