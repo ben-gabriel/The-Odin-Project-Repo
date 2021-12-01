@@ -54,14 +54,29 @@ app.get('/favicon.ico',(req, res)=>{
 
 });
 
-app.get('/:pageNumber', (req, res)=>{
+app.get('/page/:pageNumber', (req, res)=>{
+
     let pageNumber = Number(req.params.pageNumber);
+
+    if(pageNumber <= 0 ){
+        pageNumber = 1;
+    }
+
+    pageNumber = pageNumber - 1;
+
     database.findManyDocuments(pageNumber).then((postData)=>{
         res.render('index', {postData});
     });
 });
 
+app.get('/page/', (req, res)=>{
 
+    let pageNumber =  0;
+
+    database.findManyDocuments(pageNumber).then((postData)=>{
+        res.render('index', {postData});
+    });
+});
 
 
 // express.Router()
@@ -71,6 +86,7 @@ app.use('/posts', postsRouter);
 app.listen(port);
 console.log(`Server Listening in Port ${port}`);
 
+// ------ 404
 app.use((req, res)=>{
     res.status(404).render('404');
     console.log('error? 404');
