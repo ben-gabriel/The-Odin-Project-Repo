@@ -9,7 +9,7 @@ const fs = require('fs');
 const ejs = require('ejs');
 
 // ------- Database
-const {database} = require('./database');
+const {database,testFun} = require('./database');
 
 // -------- Middleware
 app.use(express.urlencoded({extended:true})); // parse body
@@ -28,9 +28,12 @@ app.get('/',(req, res)=>{
 
     console.log('log inside get /1');
     database.findManyDocuments().then((postData)=>{
+        let testVar = {
+            name:'this is testVar Name'
+        }
         console.log('log inside get / 2');
-        postData.push({totalAmountPosts:'something'});
-        res.render('index', {postData});
+        // postData.push({totalAmountPosts:'something'});
+        res.render('index', {postData,testVar});
     });
     console.log('log inside get / 3');
 

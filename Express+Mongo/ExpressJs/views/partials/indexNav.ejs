@@ -1,1 +1,16 @@
-<h1><%= postData.length  %></h1>
+<div>
+    <a href=<%= "/page/"+1 %> >1</a>
+    <a href=<%= "/page/"+2 %> >2</a>
+    <a href="">...</a>
+    <a href=<%= "/page/"+3 %> >3</a>
+    <a href=<%= "/page/"+4 %> >4</a>
+
+
+    <% if (postData.length>0) { %>
+        <% for(let i=0;i<2;i++){ %>
+        
+        <% console.log('i =',i)%>
+        <% } %>
+    <% } %>
+    
+</div>
