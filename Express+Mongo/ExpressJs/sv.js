@@ -28,12 +28,13 @@ app.get('/',(req, res)=>{
 
     console.log('log inside get /1');
     database.findManyDocuments().then((postData)=>{
-        let testVar = {
-            name:'this is testVar Name'
+        let pageData = {
+            totalPages: 100,
+            currentPage: 30,
         }
         console.log('log inside get / 2');
         // postData.push({totalAmountPosts:'something'});
-        res.render('index', {postData,testVar});
+        res.render('index', {postData,pageData});
     });
     console.log('log inside get / 3');
 
