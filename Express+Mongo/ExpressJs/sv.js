@@ -25,20 +25,7 @@ app.set('views', path.join(__dirname, '/views'));
 
 // -------- Routes
 app.get('/',(req, res)=>{    
-
-    console.log('log inside get /1');
-    database.findManyDocuments().then((postData)=>{
-        let pageData = {
-            totalPages: 100,
-            currentPage: 30,
-        }
-        console.log('log inside get / 2');
-        // postData.push({totalAmountPosts:'something'});
-        res.render('index', {postData,pageData});
-    });
-    console.log('log inside get / 3');
-
-
+    res.redirect('/page/1');
 });
 
 app.get('/style.css',(req, res)=>{    
@@ -59,40 +46,20 @@ app.get('/favicon.ico',(req, res)=>{
 
 });
 
-app.get('/page/:pageNumber', (req, res)=>{
 
-    let pageNumber = Number(req.params.pageNumber);
-    
-    if(pageNumber <= 0 ){
-        pageNumber = 1;
-    }
-
-    pageNumber = pageNumber - 1;
-
-    database.findManyDocuments(pageNumber).then((postData)=>{
-        res.render('index', {postData});
-    });
-});
-
-app.get('/page/', (req, res)=>{
-
-    let pageNumber =  0;
-
-    database.findManyDocuments(pageNumber).then((postData)=>{
-        res.render('index', {postData});
-    });
-});
-
-
-// express.Router()
+// -------- Routes-> express.Router()
 const postsRouter = require('./routes/posts');
 app.use('/posts', postsRouter);
 
-app.listen(port);
-console.log(`Server Listening in Port ${port}`);
+const pageRouter = require('./routes/page');
+app.use('/page', pageRouter);
 
 // -------- 404
 app.use((req, res)=>{
     res.status(404).render('404');
     console.log('error? 404');
 });
+
+// -------- Port
+app.listen(port);
+console.log(`Server Listening in Port ${port}`);
