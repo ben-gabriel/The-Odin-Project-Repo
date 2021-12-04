@@ -21,11 +21,14 @@ router.get('/:pageNumber', (req, res)=>{
     pageNumber = pageNumber - 1;
 
     database.findManyDocuments(pageNumber).then((postData)=>{
-        let pageData = {
-            totalPages: 100,
-            currentPage: pageNumber,
-        }
-        res.render('index', {postData, pageData});
+        database.getTotalPosts().then((totalPosts)=>{
+            let pageData = {
+                totalPages: Math.ceil(totalPosts/5),
+                currentPage: pageNumber+1,
+            }
+            console.log('totalPages = ', pageData.totalPages);
+            res.render('index', {postData, pageData});
+        });
     });
 });
 

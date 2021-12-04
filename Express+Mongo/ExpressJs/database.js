@@ -76,8 +76,19 @@ let database = {
         }
     },
 
-}
+    getTotalPosts: async function(queryObj = {}){
+        try {
+            await client.connect();
+            const result = await client.db(db).collection(collection).find(queryObj).count();
+            return result;
 
+        }catch (e){
+            console.error(e);
+        }finally{
+            await client.close();
+        }
+    },
+}
 
 function testFun(){
     console.log('log inside testFun');
