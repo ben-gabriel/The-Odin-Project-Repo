@@ -7,38 +7,7 @@
     
     <%- include('./partials/header.ejs') %>
 
-    <% if (postData.length>0) { %>
-        <% postData.forEach(post => { %>
-            <br>
-            
-            <div class="postPreview">
-
-                <section class="previewHeader">
-                    <h1 class="title"><%= post.postTitle || 'Post Title' %></h1>
-                    
-                    <section class="authorBanner">
-                        <a href='' class="userTag"><%= post.postAuthor || 'postAuthor' %></a> 
-                        <a href=<%= '/posts/'+ post._id %> > <%= post.postDate || 'Not Declared' %></a>
-                    </section>
-                </section>
-
-                <section class="previewContent">
-                    <img src=<%= post.postImg || 'https://i.5' %> alt="" srcset="">
-                    <p><%= post.postContent || '' %>
-                    </p>
-                </section>
-
-                <section class="previewFooter">
-                    <button class="btn">Share</button>
-                    <form action="/posts/Delete" method="post">
-                        <input type="hidden" name="_id" value=<%= post._id %> />
-                        <input type="submit" value="Delete" class="btn">
-                    </form>
-                </section>
-
-            </div>
-        <% }) %>
-    <% } %>
+    <%- include('./partials/postTemplate1.ejs') %>
 
     <%- include('./partials/indexNav.ejs') %>
 

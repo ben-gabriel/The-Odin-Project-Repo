@@ -1,26 +1,32 @@
-<div class="postPreview">
-
-    <section class="previewHeader">
-        <h1 class="title"><%= post.postTitle || 'Post Title' %></h1>
+<% if (postData.length>0) { %>
+    <% postData.forEach(post => { %>
+        <br>
         
-        <section class="authorBanner">
-            <a href="" class="userTag"><%= post.postAuthor || 'postAuthor' %></a> 
-            <a href=<%= '/posts/'+ post._id %> > <%= post.postDate || 'Not Declared' %></a>
-        </section>
-    </section>
+        <div class="postPreview">
 
-    <section class="previewContent">
-        <img src=<%= post.postImg || 'https://i.5' %> alt="" srcset="">
-        <p><%= post.postContent || '' %>
-        </p>
-    </section>
+            <section class="previewHeader">
+                <h1 class="title"><%= post.postTitle || 'Post Title' %></h1>
+                
+                <section class="authorBanner">
+                    <a href='' class="userTag"><%= post.postAuthor || 'postAuthor' %></a> 
+                    <a href=<%= '/posts/'+ post._id %> > <%= post.postDate || 'Not Declared' %></a>
+                </section>
+            </section>
 
-    <section class="previewFooter">
-        <button class="btn">Share</button>
-        <form action="/posts/delete" method="post">
-            <input type="hidden" name="_id" value=<%= post._id %> />
-            <input type="submit" value="Delete" class="btn">
-        </form>
-    </section>
+            <section class="previewContent">
+                <img src=<%= post.postImg || 'https://i.5' %> alt="" srcset="">
+                <p><%= post.postContent || '' %>
+                </p>
+            </section>
 
-</div>
+            <section class="previewFooter">
+                <button class="btn">Share</button>
+                <form action="/posts/Delete" method="post">
+                    <input type="hidden" name="_id" value=<%= post._id %> />
+                    <input type="submit" value="Delete" class="btn">
+                </form>
+            </section>
+
+        </div>
+    <% }) %>
+<% } %>

@@ -44,14 +44,12 @@ router.post('/delete', (req,res)=>{
 });
 
 router.get('/:id', (req, res)=>{
-    // res.send('post with id: ' + req.params.id + ' here');
     let query = Number(req.params.id);
-
-    console.log('log inside get /:id = ', query);
-
+    
     database.findOneDocument({_id: query}).then((post)=>{
         if(post){
-            res.render('singlePost', {post});
+            let postData = [post];
+            res.render('singlePost', {postData});
         }
         else{
             res.render('404')
