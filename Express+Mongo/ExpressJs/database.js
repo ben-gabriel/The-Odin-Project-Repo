@@ -88,6 +88,18 @@ let database = {
             await client.close();
         }
     },
+
+    createComment: async function(){
+        try {
+            db.posts.updateOne(
+                {postAuthor:'you'},{$push:{postArray:{_id:0,comment:'heyay'} }}
+            )
+        }catch (e){
+            
+        }finally{
+
+        }
+    },
 }
 
 function testFun(){
