@@ -43,6 +43,25 @@ router.post('/delete', (req,res)=>{
 
 });
 
+router.post('/newComment', (req,res)=>{
+
+    if(req.body._id){
+        let commentObj = {
+            postId: Number(req.body._id),
+            author: req.body.commentAuthor,
+            content: req.body.commentContent,
+        }
+
+        database.createComment(commentObj).then(()=>{
+            res.redirect('./'+req.body._id);
+        }).catch(console.error);
+    }
+    else{
+        res.redirect('/');
+    }
+
+});
+
 router.get('/:id', (req, res)=>{
     let query = Number(req.params.id);
     

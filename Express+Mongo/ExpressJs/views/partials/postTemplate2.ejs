@@ -31,20 +31,25 @@
             <section class="commentSection">
                 
                 <form action="/posts/newComment" method="post" >
-                    <textarea name="" id="" cols="" rows="" placeholder="Leave a comment" wrap="hard" class="commentInput"></textarea>
+                    <textarea name="commentContent" id="" cols="" rows="" placeholder="Leave a comment" wrap="hard" class="commentInput"></textarea>
                     
                     <input type="hidden" name="_id" value=<%= post._id %> />
+                    <input type="hidden" name="commentAuthor" value='Placeholder' />
                     <input type="submit" value="Comment" class="btn">
                 </form>  
 
-                <% post.postArray.forEach(comment=>{ %>
-                        <div class="postComments">
-                        
-                            <a href=""> <%= comment._id %> </a> <a href=""></a>
+                <% if (post.postArray){ %>
 
+                    <% post.postArray.forEach(comment=>{ %>
+                        <div class="postComments">
+                            
+                            <a href=""> <%= comment._id %> </a> <a href=""></a>
                             <p> <%= comment.comment %> </p>
+                            
                         </div>
-                <% }) %>
+                    <% }) %>
+                
+                <% } %>
 
             </section>
 

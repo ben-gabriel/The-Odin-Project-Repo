@@ -89,17 +89,22 @@ let database = {
         }
     },
 
-    createComment: async function(){
-        try {
-            db.posts.updateOne(
-                {postAuthor:'you'},{$push:{postArray:{_id:0,comment:'heyay'} }}
-            )
-        }catch (e){
-            
-        }finally{
+    createComment: async function(commentObj){
+        try {            
+            await client.connect();
+            console.log(commentObj.postId)
 
+            await client.db(db).collection(collection).updateOne(
+                {_id:commentObj.postId},{$push:{postArray: {commentAuthor:commentObj.author, comment:commentObj.content}}}
+            );
+        }catch (e){
+            console.error(e);
+        }finally{
+            await client.close();
         }
     },
+    // db.posts.updateOne({postAuthor:'you'},{$push:{postArray:{_id:0,comment:'heyay'} }})
+    // db.posts.aggregate({ $match:{postAuthor:'you'}}, {$sort:{'postArray._id':-1}})
 }
 
 function testFun(){
