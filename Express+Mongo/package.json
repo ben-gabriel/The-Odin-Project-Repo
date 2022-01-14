@@ -12,7 +12,8 @@
     "nodemon": "^2.0.14"
   },
   "scripts": {
-    "devStart": "nodemon ExpressJs/sv.js"
+    "devStart": "nodemon ExpressJs/sv.js",
+    "startSessions": "nodemon Sessions/sv.js"
   },
   "author": "",
   "license": "ISC"
