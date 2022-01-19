@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const bcrypt = require('bcrypt');
 
 // -------- Settings
 app.set('view engine', 'ejs');
@@ -24,7 +25,7 @@ app.post('/register', (req, res)=>{
 });
 
 
-// -------- Port
+// -------- Port    
 app.listen(2404);
 
 // -------- -------- -------- --------
