@@ -15,16 +15,40 @@ const users = [
 
 console.log('users = ', users);
 
-const saltPromise = bcrypt.genSalt();
-saltPromise.then((salt)=>{
-    console.log(salt);
-    let hashedPwPromise = bcrypt.hash(users[0].password, salt);
-    hashedPwPromise.then((hashPw)=>{
-        console.log(hashPw)
-    });
-});
+async function createPassword(userObj){
+    let salt = await bcrypt.genSalt();
+    let hashedPassword = await bcrypt.hash(userObj.password, salt);
+    userObj.hashedPw = hashedPassword;
+}
+
+(async function(){
+    await createPassword(users[0])
+    await createPassword(users[1])
+    await createPassword(users[2])
+    console.log('users = ', users);
+})()
+
 
 
 app.listen(port);
-console.log('Bcrypt Server Listening in port: ',port);
+console.log('Bcrypt Server Listening in port: ', port);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
