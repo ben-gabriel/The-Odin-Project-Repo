@@ -7,7 +7,7 @@ console.log('Express-Session Listening in port ', port);
 
 {/* Own Cookies test with cookie-parser. 
     const cookieParser = require('cookie-parser');
-    app.use(cookieParser('secretWord'));
+    app.use(cookieParser('SecretWord'));
     
     app.get('/', (req, res)=>{
         
@@ -34,10 +34,10 @@ console.log('Express-Session Listening in port ', port);
 */}
 
 
-{/* Express-session module test.*/
+{/* Express-session module test. 
     const session = require('express-session');
 
-    app.use(session({ secret: 'keyboard cat', cookie: { maxAge: 60000 }}))
+    app.use(session({ secret: 'SecretWord', cookie: { maxAge: 60000 }}))
 
     // Access the session as req.session
     app.get('/', function(req, res, next) {
@@ -64,5 +64,40 @@ console.log('Express-Session Listening in port ', port);
         //   }
 
     });
-}
+*/}
 
+
+{/* connect-mongodb-session test. */
+    const session = require('express-session');
+    const MongoDBStore = require('connect-mongodb-session')(session); 
+
+    const store = new MongoDBStore({
+        uri: 'mongodb://localhost:27017',
+        databaseName: 'quotesBlog',
+        collection: 'sessionTest'
+    });
+
+    
+    app.use(session({ 
+        secret: 'SecretWord', 
+        cookie: { maxAge: 60000 },
+        saveUninitialized: true,
+        resave: false,
+        store:store
+    }));
+
+    app.get('/', (req, res)=>{
+        if(req.session.views){
+            req.session.views++;
+            console.log('log in if');
+        }
+        else{
+            req.session.views = 1;
+            console.log('log in else');
+        }
+
+        res.status(200).send('views: '+req.session.views);
+        res.end()
+    });
+
+}
