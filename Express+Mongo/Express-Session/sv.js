@@ -83,7 +83,7 @@ console.log('Express-Session Listening in port ', port);
         cookie: { maxAge: 60000 },
         saveUninitialized: true,
         resave: false,
-        store:store
+        store: store
     }));
 
     app.get('/', (req, res)=>{

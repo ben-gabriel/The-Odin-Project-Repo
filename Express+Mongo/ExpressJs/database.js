@@ -108,7 +108,7 @@ let database = {
 }
 
 function testFun(){
-    console.log('log inside testFun');
+    console.log('log inside testFun() -> ExpressJs/database.js');
 }
 
 module.exports = {database,testFun};

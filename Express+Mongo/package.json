@@ -19,7 +19,8 @@
     "devStart": "nodemon ExpressJs/sv.js",
     "startSessions": "nodemon Sessions/sv.js",
     "startBcrypt": "nodemon Bcrypt/sv.js",
-    "startESessions": "nodemon Express-Session/sv.js"
+    "startESessions": "nodemon Express-Session/sv.js",
+    "startOwnLogin": "nodemon Login_OwnTest/sv.js"
   },
   "author": "",
   "license": "ISC"
