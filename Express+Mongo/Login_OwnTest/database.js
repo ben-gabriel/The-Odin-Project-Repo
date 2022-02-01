@@ -7,6 +7,37 @@ const collection = 'users';
 
 const database = {
 
+    createUser: async function(newUserObj){
+        try {
+            await client.connect();
+
+            const result = await client.db(db).collection(collection).insertOne(newUserObj);
+        
+            console.log(`{users} New Document Created, _ID: ${result.insertedId}`);
+
+            return result.insertedId;
+
+        }catch (e){
+            console.error(e);
+        }finally{
+            await client.close();
+        }    
+    },
+
+    findUser: async function(queryObj={}){
+        try {
+            await client.connect();
+            const result = await client.db(db).collection(collection).findOne(queryObj);
+        
+            console.log(`{users} Document Found: ${result}`);
+            return result;
+            
+        }catch (e){
+            console.error(e);
+        }finally{
+            await client.close();
+        }
+      },
 }
 
 

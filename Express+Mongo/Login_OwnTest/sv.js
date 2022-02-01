@@ -32,23 +32,58 @@ app.set('views', './Login_OwnTest/views');
 app.use(express.urlencoded({extended:true})); // parse body
 
 // -------- Routes
+// GET
 app.get('/', (req,res)=>{
     res.render('index');
-});
-
-app.get('/register', (req,res)=>{
-    res.render('register');
-});
-app.post('/register', (req,res)=>{
-    res.end();
 });
 
 app.get('/login', (req,res)=>{
     res.render('login');
 });
+
+app.get('/register', (req,res)=>{
+    res.render('register');
+});
+
+// POST
 app.post('/login', (req,res)=>{
     res.end();
 });
+
+app.post('/register', (req,res)=>{
+    
+    async function encryptPassword(rawPassword){
+        
+        try {
+            // generate salt, to mask real password. 
+            let salt = await bcrypt.genSalt();
+        
+            // hash real password.
+            let hashedPassword = await bcrypt.hash(rawPassword, salt);
+            
+            return hashedPassword;
+        } 
+        catch(e) {
+            console.log('error in encryptPassword');
+        }
+        
+    }
+
+    let hashPassword = encryptPassword(req.body.password);
+
+    hashPassword.then(
+        (encryptedPassword)=>{
+            let newUserObj = {
+                _id: req.body.username,
+                password: encryptedPassword
+            };
+            database.createUser(newUserObj);
+        }
+    );
+
+    res.end();
+});
+
 
 // -------- Database
 const {database,testFun} = require('./database');
