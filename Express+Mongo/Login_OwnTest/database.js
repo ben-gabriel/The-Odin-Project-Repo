@@ -6,5 +6,12 @@ const db = 'testDb2';
 const collection = 'users';
 
 const database = {
-    
+
 }
+
+
+function testFun(){
+    console.log('log inside testFun() -> ExpressJs/database.js');
+}
+
+module.exports = {database, testFun};

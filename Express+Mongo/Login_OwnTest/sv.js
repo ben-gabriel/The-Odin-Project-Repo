@@ -37,12 +37,16 @@ app.get('/', (req,res)=>{
 });
 
 app.get('/register', (req,res)=>{
-    res.write('register');
+    res.render('register');
+});
+app.post('/register', (req,res)=>{
     res.end();
 });
 
 app.get('/login', (req,res)=>{
-    res.write('login');
+    res.render('login');
+});
+app.post('/login', (req,res)=>{
     res.end();
 });
 
