@@ -19,7 +19,7 @@ const mongoStore = new MongoDBStore({
 app.use(
     session({
         secret: 'SecretWord',
-        cookie: {maxAge:null},
+        cookie: {maxAge:1000},
         saveUninitialized: true,
         resave: false,
         store: mongoStore
@@ -32,58 +32,87 @@ app.set('views', './Login_OwnTest/views');
 app.use(express.urlencoded({extended:true})); // parse body
 
 // -------- Routes
-// GET
-app.get('/', (req,res)=>{
-    res.render('index');
-});
+{// GET
+    app.get('/', (req,res)=>{
+        res.render('index');
+    });
 
-app.get('/login', (req,res)=>{
-    res.render('login');
-});
+    app.get('/login', (req,res)=>{
+        res.render('login');
+    });
 
-app.get('/register', (req,res)=>{
-    res.render('register');
-});
+    app.get('/register', (req,res)=>{
+        res.render('register');
+    });
+}
 
-// POST
-app.post('/login', (req,res)=>{
-    res.end();
-});
-
-app.post('/register', (req,res)=>{
-    
-    async function encryptPassword(rawPassword){
+{// POST
+    app.post('/login', (req,res)=>{
         
-        try {
-            // generate salt, to mask real password. 
-            let salt = await bcrypt.genSalt();
-        
-            // hash real password.
-            let hashedPassword = await bcrypt.hash(rawPassword, salt);
+        let idLookUp = database.findUser({_id: req.body.username});
+
+        idLookUp.then((lookUpResult)=>{
+
+            if(lookUpResult){
+                console.log('{POST /login} Found User With ID ' + result._id);
+                
+                let passwordCompare = bcrypt.compare(req.body.password, result.password);
+
+                passwordCompare.then((compareResult)=>{
+
+                    if(compareResult){
+                        console.log('{POST /login} Access Granted');
+                    }
+                    else{
+                        console.log('{POST /login} Access Denied - Wrong Password');
+                    }
+                    
+                });
+
+            }
+            else{
+                console.log('{POST /login} User Not Found');
+            }
             
-            return hashedPassword;
-        } 
-        catch(e) {
-            console.log('error in encryptPassword');
-        }
+        });
+
+        res.redirect('/login');
+    });
+
+    app.post('/register', (req,res)=>{
         
-    }
-
-    let hashPassword = encryptPassword(req.body.password);
-
-    hashPassword.then(
-        (encryptedPassword)=>{
-            let newUserObj = {
-                _id: req.body.username,
-                password: encryptedPassword
-            };
-            database.createUser(newUserObj);
+        async function encryptPassword(rawPassword){
+            
+            try {
+                // generate salt, to mask real password. 
+                let salt = await bcrypt.genSalt();
+            
+                // hash real password.
+                let hashedPassword = await bcrypt.hash(rawPassword, salt);
+                
+                return hashedPassword;
+            } 
+            catch(e) {
+                console.log('Error in encryptPassword');
+            }
+            
         }
-    );
 
-    res.end();
-});
+        let hashPassword = encryptPassword(req.body.password);
 
+        hashPassword.then(
+            (encryptedPassword)=>{
+                let newUserObj = {
+                    _id: req.body.username,
+                    password: encryptedPassword
+                };
+                database.createUser(newUserObj);
+            }
+        );
+
+        res.redirect('/login');
+    });
+}
 
 // -------- Database
 const {database,testFun} = require('./database');
